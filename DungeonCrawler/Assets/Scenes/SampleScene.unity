@@ -1335,6 +1335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   Enemy: {fileID: 7040002042902315285, guid: 9e13b0d49bfc84d8a89a4bec6b61a62a, type: 3}
   SeekPointTemp: {fileID: 7601287476776223357, guid: 6049bafd17c3f4935ab7e478fbf0c17c, type: 3}
+  EnemyList:
+  - {fileID: 7040002042902315285, guid: 9e13b0d49bfc84d8a89a4bec6b61a62a, type: 3}
 --- !u!4 &1703313698
 Transform:
   m_ObjectHideFlags: 0
