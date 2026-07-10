@@ -5,10 +5,7 @@ public class SeekPointTemp : MonoBehaviour
     public GameObject EnemyPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    void Start()
-    {
-        EnemyPos = GameObject.FindGameObjectWithTag("Enemy");
-    }
+    
     // Update is called once per frame
     void Update()
     {

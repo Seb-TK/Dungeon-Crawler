@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c95a302829184ec8938249a86898657, type: 3}
+  m_Name: BaseMeleeEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  Mesh: {fileID: 1486190373629811202, guid: 4456a086d8baa4097a6aed5c434fea5a, type: 3}
+  Health: 5
+  MoveSpeed: 27
+  TurnSpeed: 15
+  DriftMultiplier: 2
+  AiType: Melee
+  Bullet: {fileID: 6218370908970324485, guid: 4269c199ee9ff41e38ad971b376f5d49, type: 3}
+  FireRate: -1

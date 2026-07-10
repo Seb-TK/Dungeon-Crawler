@@ -1,19 +1,42 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject Enemy;
-    [SerializeField] private GameObject SeekPointTemp;
-    [SerializeField] private GameObject[] EnemyList;
+    [SerializeField] private EnemyData[] EnemyList;
+    //potential spawn locations (temp for testing)
+    [SerializeField] float minX;
+    [SerializeField] float maxX;
+    [SerializeField] float minZ;
+    [SerializeField] float maxZ;
     void Start()
     {
-        Instantiate(Enemy, new Vector3(5,0,0), Quaternion.identity);
-        Instantiate(SeekPointTemp);
+        SpawnEnemyAtRandomPoint(0);
+        SpawnEnemyAtRandomPoint(0);
+        SpawnEnemyAtRandomPoint(1);
+        SpawnEnemyAtRandomPoint(1);
+    }
+    void SpawnEnemyAtRandomPoint(int EnemyType)
+    {
+        // probably change later to spawn from gates or something
+        Vector3 SpawnPosition = new Vector3 
+        (
+            Random.Range(minX, maxX),
+            0,
+            Random.Range(minZ, maxZ)
+        );
+        SpawnEnemy(EnemyType,SpawnPosition);
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnEnemy(int EnemyIndex, Vector3 spawnPosition)
     {
-        
+        EnemyData EnemyType = EnemyList[EnemyIndex];
+        GameObject SpawnedEnemy = Instantiate(Enemy, spawnPosition, Quaternion.identity);
+        //set the spawned enemy data to the EnemyType variable
+        SpawnedEnemy.GetComponent<Enemy>().data = EnemyType;
+
     }
+    
 }

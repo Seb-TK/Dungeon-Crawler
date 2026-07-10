@@ -1,11 +1,11 @@
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
-    public GameObject Player;
+    
     void Start()
     {
-        Instantiate(Player);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

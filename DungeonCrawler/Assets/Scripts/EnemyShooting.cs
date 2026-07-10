@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
-    [SerializeField] private GameObject Bullet;
-    private float nextFireTime;
-    [SerializeField] public float fireRate;
+    public GameObject Bullet;
+    public float fireRate;
 
-    // Update is called once per frame
+    private float nextFireTime;
+
     void FixedUpdate()
     {
+        if(fireRate == -1)
+        {
+            this.enabled = false;
+        }
         if (Time.time > nextFireTime){
             GameObject SpawnedBullet = Instantiate(Bullet, transform.position, transform.rotation);
             SpawnedBullet.GetComponent<Bullet>().isPlayerBullet = false;
