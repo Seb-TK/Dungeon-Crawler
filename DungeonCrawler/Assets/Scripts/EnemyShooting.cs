@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
+    //WILL BE CHANGED LATER when modular guns are added
     public GameObject Bullet;
     public float fireRate;
 

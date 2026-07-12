@@ -14,14 +14,11 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         SpawnEnemyAtRandomPoint(0);
-        SpawnEnemyAtRandomPoint(0);
-        SpawnEnemyAtRandomPoint(1);
-        SpawnEnemyAtRandomPoint(1);
     }
     void SpawnEnemyAtRandomPoint(int EnemyType)
     {
         // probably change later to spawn from gates or something
-        Vector3 SpawnPosition = new Vector3 
+        Vector3 SpawnPosition = new Vector3
         (
             Random.Range(minX, maxX),
             0,

@@ -24,14 +24,17 @@ public class EnemyMovement : MonoBehaviour
     private Collider[] hits;
     private bool collideCheck;
 
+    private float seekPointTimer;
     Rigidbody rb;
     public Transform PlayerTransform;
     
     public Vector3 SeekPoint; // placed here for debugging
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        PickNewSeekPoint(); 
+        PickNewSeekPoint();
     }
 
     // Update is called once per frame
@@ -40,8 +43,9 @@ public class EnemyMovement : MonoBehaviour
         Vector2 SeekPoint2D = Random.insideUnitCircle * SeekRange;
         SeekPoint = transform.position + new Vector3(SeekPoint2D.x, 0, SeekPoint2D.y);
         drifting = false;
+        seekPointTimer = Time.time;
     }
-    void FixedUpdate()
+    void Update()
     {   
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -55,19 +59,19 @@ public class EnemyMovement : MonoBehaviour
         turn = Vector3.Dot(transform.right, directionToSeekPoint);
 
         if (turn > 0.3f | turn < -0.3f)
-        {
-            drifting = true;
-        }
+            {
+                drifting = true;
+            }
         else
-        {
-            drifting = false;
-        }
+            {
+                drifting = false;
+            }
 
         //ai alg for setting seek point to the appropriate location
-            if (AiType == "Ranged"){
+        if (AiType == "Ranged"){
             //pick a random seek point around you in area
             //If the enemy is at the right distance it stops moving
-            if (Vector3.Distance(PlayerTransform.position,transform.position) > MaxDistance | Vector3.Distance(PlayerTransform.position,transform.position) < MinDistance)
+        if (Vector3.Distance(PlayerTransform.position,transform.position) > MaxDistance | Vector3.Distance(PlayerTransform.position,transform.position) < MinDistance)
             {
                 Move = 1;
             }
@@ -75,27 +79,39 @@ public class EnemyMovement : MonoBehaviour
             {
                 Move = 0;
             }
+        //retry if object is in the way
+        RaycastHit hit2;
+        Vector3 direction = (SeekPoint - transform.position).normalized;
+        if (Physics.SphereCast(transform.position, 0.5f, direction, out hit2, 10f))
+            {
+                PickNewSeekPoint();
+            }
             
             // retry if seek point is too far 
-            if (Vector3.Distance(SeekPoint,PlayerTransform.position) > MaxDistance)
+        if (Vector3.Distance(SeekPoint,PlayerTransform.position) > MaxDistance)
             {
                 // if player is way too close to player then accept points that are too far
                 if (Vector3.Distance(PlayerTransform.position, transform.position) > MinDistance / 2){
                     PickNewSeekPoint();
                 }
             }
+
+        // if player is way too close to player then accept points that are too far
+        if (Vector3.Distance(PlayerTransform.position, SeekPoint) < MinDistance){
+            PickNewSeekPoint();
+        }
             
             
             //retry if seek point is too close
-            if (Vector3.Distance(SeekPoint,PlayerTransform.position) < MinDistance)
+        if (Vector3.Distance(SeekPoint,PlayerTransform.position) < MinDistance)
             {
                 PickNewSeekPoint();
             }
             
             //checks if seek point isn't too close to obstacles
-            hits = Physics.OverlapSphere(SeekPoint, 5);
-            collideCheck = false;
-            foreach (Collider hit in hits)
+        hits = Physics.OverlapSphere(SeekPoint, 5);
+        collideCheck = false;
+        foreach (Collider hit in hits)
             {
                 if (hit.CompareTag("Obs"))
                 {
@@ -103,38 +119,42 @@ public class EnemyMovement : MonoBehaviour
                     break;
                 }
             }
-            if (collideCheck)
+        if (collideCheck)
             {
                 PickNewSeekPoint();
             }
             //check if seek point is too far from center
-            if (Vector3.Distance(SeekPoint,Vector3.zero) > 40)
+        if (Vector3.Distance(SeekPoint,Vector3.zero) > 40)
             {
                 PickNewSeekPoint();
             }
 
-            // if seek point is way too close to player
-            
-            }
-        else if(AiType == "Melee")
+        } else if(AiType == "Melee")
         {
             SeekPoint = player.transform.position;
         }
 
+    }
+
+    void FixedUpdate()
+    {
         // decide what to do to get closer to seek point
         // or check for close objects and move away from them
         
         //applying decision forces to actually move
-        rb.AddForce(transform.forward * Move * moveSpeed);
-        if (drifting)
-        {
-            transform.Rotate(0, turn * turnSpeed * driftMultiplier, 0);
-            skidMarks.emitting = true;
-        }
-        else
-        {
-            transform.Rotate(0, turn * turnSpeed, 0);
-            skidMarks.emitting = false;
+        Debug.Log(Time.time - seekPointTimer);
+        if (Time.time - seekPointTimer > 0.1f){
+            rb.AddForce(transform.forward * Move * moveSpeed);
+            if (drifting)
+            {
+                transform.Rotate(0, turn * turnSpeed * driftMultiplier, 0);
+                skidMarks.emitting = true;
+            } else
+            {
+                transform.Rotate(0, turn * turnSpeed, 0);
+                skidMarks.emitting = false;
+            }
         }
     }
+
 }

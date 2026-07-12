@@ -15,7 +15,7 @@ MonoBehaviour:
   Mesh: {fileID: 1486190373629811202, guid: 4456a086d8baa4097a6aed5c434fea5a, type: 3}
   Health: 5
   MoveSpeed: 21
-  TurnSpeed: 20
+  TurnSpeed: 1
   DriftMultiplier: 3
   AiType: Ranged
   Bullet: {fileID: 6218370908970324485, guid: 4269c199ee9ff41e38ad971b376f5d49, type: 3}
