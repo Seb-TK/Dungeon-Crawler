@@ -2046,6 +2046,7 @@ MonoBehaviour:
   rotationY: 30
   rotationMin: 20
   rotationMax: 80
+  cameraType: 
 --- !u!1 &2016039787
 GameObject:
   m_ObjectHideFlags: 0

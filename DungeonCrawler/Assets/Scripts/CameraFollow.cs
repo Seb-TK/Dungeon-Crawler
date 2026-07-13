@@ -10,12 +10,16 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] float rotationY = 0f; // can be used to offset camera height
     [SerializeField] private float rotationMin;
     [SerializeField] private float rotationMax;
+    [SerializeField] string cameraType;
     float rotationX = 0f;
+    
 
     void Update()
     {
+        
         rotationX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         rotationY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        
         //change values to change vertical clamping
         rotationY = Mathf.Clamp(rotationY, rotationMin, rotationMax);
 
@@ -33,6 +37,8 @@ public class CameraFollow : MonoBehaviour
                 transform.position = new Vector3 (transform.position.x,hit.point.y + minHeight, transform.position.z);
             }
         }
+
+
 
     }
 }

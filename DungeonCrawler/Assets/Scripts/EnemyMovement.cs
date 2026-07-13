@@ -1,5 +1,7 @@
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -30,6 +32,9 @@ public class EnemyMovement : MonoBehaviour
     
     public Vector3 SeekPoint; // placed here for debugging
     
+    private float reverseTimer;
+    private int reverse;
+    private bool isColliding;
 
     void Start()
     {
@@ -58,11 +63,10 @@ public class EnemyMovement : MonoBehaviour
         Vector3 directionToSeekPoint = (SeekPoint - transform.position).normalized;
         turn = Vector3.Dot(transform.right, directionToSeekPoint);
 
-        if (turn > 0.3f | turn < -0.3f)
+        if (turn > 0.4f | turn < -0.4f)
             {
                 drifting = true;
-            }
-        else
+            } else if (turn < 0.2f | turn > -0.2f)
             {
                 drifting = false;
             }
@@ -103,10 +107,10 @@ public class EnemyMovement : MonoBehaviour
             
             
             //retry if seek point is too close
-        if (Vector3.Distance(SeekPoint,PlayerTransform.position) < MinDistance)
-            {
-                PickNewSeekPoint();
-            }
+        // if (Vector3.Distance(SeekPoint,PlayerTransform.position) < MinDistance)
+        //     {
+        //         PickNewSeekPoint();
+        //     }
             
             //checks if seek point isn't too close to obstacles
         hits = Physics.OverlapSphere(SeekPoint, 5);
@@ -142,19 +146,47 @@ public class EnemyMovement : MonoBehaviour
         // or check for close objects and move away from them
         
         //applying decision forces to actually move
-        Debug.Log(Time.time - seekPointTimer);
         if (Time.time - seekPointTimer > 0.1f){
-            rb.AddForce(transform.forward * Move * moveSpeed);
+            rb.AddForce(transform.forward * Move * moveSpeed * reverse);
             if (drifting)
             {
-                transform.Rotate(0, turn * turnSpeed * driftMultiplier, 0);
+                transform.Rotate(0, turn * turnSpeed * driftMultiplier * (rb.linearVelocity.magnitude / 10), 0);
                 skidMarks.emitting = true;
             } else
             {
-                transform.Rotate(0, turn * turnSpeed, 0);
+                transform.Rotate(0, turn * turnSpeed * (rb.linearVelocity.magnitude / 10), 0);
                 skidMarks.emitting = false;
             }
         }
+
+
+        //after a moment it starts to reverse until timer reaches zero
+        if (reverseTimer > 20)
+        {
+            reverseTimer --;
+        } else if(reverseTimer > 0)
+        {
+            reverse = -1;
+            reverseTimer --;
+        }
+        else
+        {
+            reverse = 1;
+        }
     }
+
+    //whenever it hits something activate a timer
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            reverseTimer = 40;
+        }
+        if (collision.gameObject.CompareTag("Obs"))
+        {
+            reverseTimer = 40;
+        }
+    }
+    
 
 }

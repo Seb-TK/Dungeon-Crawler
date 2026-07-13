@@ -14,6 +14,9 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         SpawnEnemyAtRandomPoint(0);
+        SpawnEnemyAtRandomPoint(0);
+        SpawnEnemyAtRandomPoint(1);
+        SpawnEnemyAtRandomPoint(1);
     }
     void SpawnEnemyAtRandomPoint(int EnemyType)
     {

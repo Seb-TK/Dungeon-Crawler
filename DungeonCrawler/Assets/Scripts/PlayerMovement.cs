@@ -98,12 +98,12 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.Rotate(0, turn * turnSpeed * driftMultiplier, 0);
+            transform.Rotate(0, turn * turnSpeed * driftMultiplier * (rb.linearVelocity.magnitude / 10), 0);
             skidMarks.emitting = true;
         }
         else
         {
-            transform.Rotate(0, turn * turnSpeed, 0);
+            transform.Rotate(0, turn * turnSpeed * (rb.linearVelocity.magnitude / 10), 0);
             skidMarks.emitting = false;
         }
     }

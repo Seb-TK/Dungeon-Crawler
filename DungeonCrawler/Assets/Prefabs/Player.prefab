@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4882672339627135036}
   - component: {fileID: 6766860653138613339}
   - component: {fileID: 2422586048438741258}
-  - component: {fileID: 8274055185458203010}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -112,18 +111,6 @@ MonoBehaviour:
   nitroFatigueThreshold: 5
   nitroFatigueMultiplier: 0.3
   nitroFuel: 0
---- !u!114 &8274055185458203010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2895617954503619488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ccb846b5d51d4f90a668e2496d11015, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1001 &1054255521117016641
 PrefabInstance:
   m_ObjectHideFlags: 0
