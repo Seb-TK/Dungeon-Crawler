@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] GameObject playerObj;
     [SerializeField] GameObject playerMesh;
+    [SerializeField] GameObject playerGun;
     
     void Start()
     {
@@ -31,7 +32,9 @@ public class PlayerManager : MonoBehaviour
     void SpawnCharacter()
     {
         playerObj = Instantiate(playerObj, new Vector3(0,0,0), Quaternion.identity);
-        Instantiate(playerMesh, new Vector3(0,0,0), Quaternion.identity, playerObj.transform);
+        GameObject playerMeshTemp = Instantiate(playerMesh, new Vector3(0,0,0), Quaternion.identity, playerObj.transform);
+        Instantiate(playerGun, new Vector3(0,0.55f,0), Quaternion.identity, playerObj.transform);
+        
         PlayerMovement player = playerObj.GetComponent<PlayerMovement>();
 
         player.moveSpeed = moveSpeed;

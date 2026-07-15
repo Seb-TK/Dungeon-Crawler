@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     EnemyShooting shooting;
     float health;
     public GameObject SeekPointTemp;
+    GameObject visualMesh;
     void Start()
     {
         //seek point (for visual debugging)
@@ -14,7 +15,7 @@ public class Enemy : MonoBehaviour
         seekPointObj.GetComponent<SeekPointTemp>().EnemyPos = gameObject;
         
         //instantiate and parent mesh
-        Instantiate(data.Mesh, transform.position, transform.rotation, transform);
+        visualMesh = Instantiate(data.Mesh, transform.position, transform.rotation, transform);
 
         //use scriptable object's data to set variables
         health = data.Health;

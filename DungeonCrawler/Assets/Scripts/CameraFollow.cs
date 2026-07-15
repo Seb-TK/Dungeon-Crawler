@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] float rotationY = 0f; // can be used to offset camera height
     [SerializeField] private float rotationMin;
     [SerializeField] private float rotationMax;
-    [SerializeField] string cameraType;
     float rotationX = 0f;
+    public GameObject targetedEnemy;
+    public float AimAssistRadius;
+    public float AimAssistRange;
     
 
     void Update()
@@ -19,7 +22,7 @@ public class CameraFollow : MonoBehaviour
         
         rotationX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         rotationY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        
+
         //change values to change vertical clamping
         rotationY = Mathf.Clamp(rotationY, rotationMin, rotationMax);
 
@@ -38,7 +41,13 @@ public class CameraFollow : MonoBehaviour
             }
         }
 
-
+        //Aim assist alg for locking onto enemies
+        targetedEnemy = null;
+        RaycastHit Spherehit;
+        if (Physics.SphereCast(transform.position, AimAssistRadius, Vector3.forward, out Spherehit, AimAssistRange))
+        {
+            targetedEnemy = Spherehit.collider.gameObject;
+        }
 
     }
 }
