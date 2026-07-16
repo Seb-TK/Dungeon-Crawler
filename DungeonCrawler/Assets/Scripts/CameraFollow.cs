@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] float rotationY = 0f; // can be used to offset camera height
     [SerializeField] private float rotationMin;
     [SerializeField] private float rotationMax;
+    [SerializeField] private float xAxisTilt;
     float rotationX = 0f;
     public GameObject targetedEnemy;
     public float AimAssistRadius;
@@ -31,6 +32,7 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = desiredPosition;
         transform.LookAt(Player);
+        transform.Rotate(xAxisTilt, 0f,0f);
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 20f))
@@ -42,12 +44,20 @@ public class CameraFollow : MonoBehaviour
         }
 
         //Aim assist alg for locking onto enemies
+        Vector2 screenCenter = new Vector2 (Screen.width / 2f, Screen.height / 2f);
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         targetedEnemy = null;
-        RaycastHit Spherehit;
-        if (Physics.SphereCast(transform.position, AimAssistRadius, Vector3.forward, out Spherehit, AimAssistRange))
+        float targetedEnemyDistance = AimAssistRadius;
+        foreach (GameObject Enemy in Enemies)
         {
-            targetedEnemy = Spherehit.collider.gameObject;
+            float tempDistance = Vector2.Distance(Camera.main.WorldToScreenPoint(Enemy.transform.position), screenCenter);
+            if (tempDistance < targetedEnemyDistance & Vector3.Distance(Player.transform.position, Enemy.transform.position) < AimAssistRange)
+            {
+                targetedEnemyDistance = tempDistance;
+                targetedEnemy = Enemy;
+            }
         }
+
 
     }
 }

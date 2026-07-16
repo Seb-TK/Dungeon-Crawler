@@ -11,7 +11,12 @@ public class PlayerShooting : MonoBehaviour
     private float nextFireTime;
     public float TurnSpeed;
     public string AimType;
+    [SerializeField] CameraFollow cameraScript;
     bool firing;
+    void Start()
+    {
+        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+    }
 
     void Update()
     {
@@ -37,9 +42,20 @@ public class PlayerShooting : MonoBehaviour
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
             }
-        } else if(AimType == "Manual")
-        {
-            
+        } else if(AimType == "Manual"){
+            Vector3 direction;
+            Quaternion targetDirection;
+            if(cameraScript.targetedEnemy != null){
+                direction = (cameraScript.targetedEnemy.transform.position - transform.position).normalized;
+                targetDirection = Quaternion.LookRotation(direction);
+            }
+            else
+            {
+                targetDirection = Camera.main.transform.rotation;
+            }
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
+
         }
         if (Input.GetMouseButtonDown(0))
         {

@@ -130,3 +130,4 @@ MonoBehaviour:
   bulletSpeed: 0
   TurnSpeed: 5
   AimType: Automatic
+  cameraScript: {fileID: 0}

@@ -11,12 +11,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float maxX;
     [SerializeField] float minZ;
     [SerializeField] float maxZ;
-    void Start()
+    void Update()
     {
-        SpawnEnemyAtRandomPoint(0);
-        SpawnEnemyAtRandomPoint(0);
-        SpawnEnemyAtRandomPoint(1);
-        SpawnEnemyAtRandomPoint(1);
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            SpawnEnemyAtRandomPoint(0);
+        }
+        else if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            SpawnEnemyAtRandomPoint(1);
+        }
     }
     void SpawnEnemyAtRandomPoint(int EnemyType)
     {
