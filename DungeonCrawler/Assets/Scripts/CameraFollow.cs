@@ -13,10 +13,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float rotationMax;
     [SerializeField] private float xAxisTilt;
     float rotationX = 0f;
-    public GameObject targetedEnemy;
-    public float AimAssistRadius;
-    public float AimAssistRange;
-    
 
     void Update()
     {
@@ -42,22 +38,6 @@ public class CameraFollow : MonoBehaviour
                 transform.position = new Vector3 (transform.position.x,hit.point.y + minHeight, transform.position.z);
             }
         }
-
-        //Aim assist alg for locking onto enemies
-        Vector2 screenCenter = new Vector2 (Screen.width / 2f, Screen.height / 2f);
-        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        targetedEnemy = null;
-        float targetedEnemyDistance = AimAssistRadius;
-        foreach (GameObject Enemy in Enemies)
-        {
-            float tempDistance = Vector2.Distance(Camera.main.WorldToScreenPoint(Enemy.transform.position), screenCenter);
-            if (tempDistance < targetedEnemyDistance & Vector3.Distance(Player.transform.position, Enemy.transform.position) < AimAssistRange)
-            {
-                targetedEnemyDistance = tempDistance;
-                targetedEnemy = Enemy;
-            }
-        }
-
 
     }
 }
