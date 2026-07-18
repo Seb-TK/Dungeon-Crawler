@@ -7,6 +7,7 @@ public class EnemyShooting : MonoBehaviour
     //WILL BE CHANGED LATER when modular guns are added
     public GameObject Bullet;
     public float fireRate;
+    public float bulletSpeed;
 
     private float nextFireTime;
 
@@ -19,6 +20,7 @@ public class EnemyShooting : MonoBehaviour
         if (Time.time > nextFireTime){
             GameObject SpawnedBullet = Instantiate(Bullet, transform.position, transform.rotation);
             SpawnedBullet.GetComponent<Bullet>().isPlayerBullet = false;
+            SpawnedBullet.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
             nextFireTime = Time.time + fireRate;
         }
         

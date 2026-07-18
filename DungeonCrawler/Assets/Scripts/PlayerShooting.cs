@@ -86,6 +86,7 @@ public class PlayerShooting : MonoBehaviour
                 if (firing){firing = false;} else {firing = true;}
             }
         }
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
     Collider findClosestEnemy()

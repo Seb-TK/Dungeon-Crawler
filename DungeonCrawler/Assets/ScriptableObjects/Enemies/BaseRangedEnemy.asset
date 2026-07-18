@@ -21,3 +21,4 @@ MonoBehaviour:
   AiType: Ranged
   Bullet: {fileID: 6218370908970324485, guid: 4269c199ee9ff41e38ad971b376f5d49, type: 3}
   FireRate: 0.5
+  BulletSpeed: 10

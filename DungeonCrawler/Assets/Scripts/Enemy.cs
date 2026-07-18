@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
 
         shooting.Bullet = data.Bullet;
         shooting.fireRate = data.FireRate;
+        shooting.bulletSpeed = data.BulletSpeed;
 
     }
 
