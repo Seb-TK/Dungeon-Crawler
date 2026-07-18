@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal.Commands;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -11,57 +12,80 @@ public class PlayerShooting : MonoBehaviour
     private float nextFireTime;
     public float TurnSpeed;
     public string AimType;
-    [SerializeField] CameraFollow cameraScript;
+    GameObject visualMesh;
+    [SerializeField] AimAssistCrosshair aimAssistCrosshair;
+    [SerializeField] GunData Gun;
+    GunData logEquippedGun;
     bool firing;
     void Start()
     {
-        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+        aimAssistCrosshair = FindAnyObjectByType<AimAssistCrosshair>().GetComponent<AimAssistCrosshair>();
     }
-
+    void FixedUpdate()
+    {
+        //apply scriptable object (gun) if new gun is equipped
+        
+        if (Gun != logEquippedGun)
+        {
+            Bullet = Gun.Bullet;
+            fireRate = Gun.FireRate;
+            bulletSpeed = Gun.BulletSpeed;
+            TurnSpeed = Gun.TurnSpeed;
+            if(visualMesh != null)
+            {
+                Destroy(visualMesh);
+            }
+            visualMesh = Instantiate(Gun.VisualMesh, transform.position, Quaternion.identity, transform);
+            
+        }
+        logEquippedGun = Gun;
+    }
     void Update()
     {
-        if(fireRate == -1)
+        
+        
+        if(fireRate != 0)
         {
-            this.enabled = false;
-        } else if(firing){
-            if (Time.time > nextFireTime){
-                GameObject SpawnedBullet = Instantiate(Bullet, transform.position, transform.rotation);
-                SpawnedBullet.GetComponent<Bullet>().isPlayerBullet = true;
-                nextFireTime = Time.time + fireRate;
+            if(firing){
+                if (Time.time > nextFireTime){
+                    GameObject SpawnedBullet = Instantiate(Bullet, transform.position, transform.rotation);
+                    SpawnedBullet.GetComponent<Bullet>().isPlayerBullet = true;
+                    SpawnedBullet.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
+                    nextFireTime = Time.time + fireRate;
+                }
             }
-        }
-        if (AimType == "Automatic")
-        { 
-            Collider closestEnemy = findClosestEnemy();
-            
-            if (closestEnemy != null)
-            {
+            if (AimType == "Automatic")
+            { 
+                Collider closestEnemy = findClosestEnemy();
+                
+                if (closestEnemy != null)
+                {
 
-                Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
-                Quaternion targetDirection = Quaternion.LookRotation(direction);
+                    Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
+                    Quaternion targetDirection = Quaternion.LookRotation(direction);
+
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
+                }
+            } else if(AimType == "Manual"){
+                Vector3 direction;
+                Quaternion targetDirection;
+                if(aimAssistCrosshair.targetedEnemy != null){
+                    direction = (aimAssistCrosshair.targetedEnemy.transform.position - transform.position).normalized;
+                    targetDirection = Quaternion.LookRotation(direction);
+                }
+                else
+                {
+                    targetDirection = Camera.main.transform.rotation;
+                }
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
+
             }
-        } else if(AimType == "Manual"){
-            Vector3 direction;
-            Quaternion targetDirection;
-            if(cameraScript.targetedEnemy != null){
-                direction = (cameraScript.targetedEnemy.transform.position - transform.position).normalized;
-                targetDirection = Quaternion.LookRotation(direction);
-            }
-            else
+            if (Input.GetMouseButtonDown(0))
             {
-                targetDirection = Camera.main.transform.rotation;
+                if (firing){firing = false;} else {firing = true;}
             }
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
-
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (firing){firing = false;} else {firing = true;}
-        }
-
     }
 
     Collider findClosestEnemy()

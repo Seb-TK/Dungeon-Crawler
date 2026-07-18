@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c95a302829184ec8938249a86898657, type: 3}
-  m_Name: BaseRangedEnemy
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  Name: Base RangedEnemy
-  VisualMesh: {fileID: 1486190373629811202, guid: 4456a086d8baa4097a6aed5c434fea5a, type: 3}
-  Health: 5
-  MoveSpeed: 21
-  TurnSpeed: 1
-  DriftMultiplier: 3
-  AiType: Ranged
+  m_Script: {fileID: 11500000, guid: 20ae8a753e4ea455ca337ce01c340d87, type: 3}
+  m_Name: BasicGun
+  m_EditorClassIdentifier: Assembly-CSharp::GunData
+  Name: Basic Gun
+  Class: Rifle
+  VisualMesh: {fileID: 6355475067417723421, guid: 94aa73930ca7f44998f8b562e50f2de6, type: 3}
   Bullet: {fileID: 6218370908970324485, guid: 4269c199ee9ff41e38ad971b376f5d49, type: 3}
   FireRate: 0.5
+  BulletSpeed: 10
+  TurnSpeed: 5
+  Accuracy: 0
+  Health: 0
+  Defense: 0
+  SpecialAttributes: []

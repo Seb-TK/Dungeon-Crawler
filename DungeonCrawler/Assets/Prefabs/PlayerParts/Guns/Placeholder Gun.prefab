@@ -129,5 +129,6 @@ MonoBehaviour:
   fireRate: 0.5
   bulletSpeed: 0
   TurnSpeed: 5
-  AimType: Automatic
-  cameraScript: {fileID: 0}
+  AimType: Manual
+  aimAssistCrosshair: {fileID: 0}
+  equippedGun: {fileID: 0}

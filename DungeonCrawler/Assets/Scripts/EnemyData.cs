@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [Header("General")]
-    public GameObject Mesh;
+    public string Name;
+    public GameObject VisualMesh;
     public float Health;
 
     [Header("Movement")]

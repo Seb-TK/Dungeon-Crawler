@@ -1064,6 +1064,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba965ebb662448c3946b053ae6491a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  targetedEnemy: {fileID: 0}
+  AimAssistRadius: 80
+  AimAssistRange: 30
+  targetingMethod: WorldToScreenPoint
 --- !u!1 &1017766533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1222,7 @@ MonoBehaviour:
   nitroFatigueMultiplier: 0.3
   playerObj: {fileID: 2895617954503619488, guid: 17bbcbf523ff24f82826577c8d297983, type: 3}
   playerMesh: {fileID: 5863533050495486670, guid: 539d9cf2764ec4bd6acf05b6daa5c1d7, type: 3}
-  playerGun: {fileID: 1430929371148624700, guid: bf84496823ccd4fcea7541c555a74ffc, type: 3}
+  playerGun: {fileID: 2582670129980326617, guid: f494ac180b58d4b919a4cba25c39895d, type: 3}
 --- !u!4 &1030160209
 Transform:
   m_ObjectHideFlags: 0
@@ -2213,9 +2217,6 @@ MonoBehaviour:
   rotationMin: 20
   rotationMax: 80
   xAxisTilt: -20
-  targetedEnemy: {fileID: 0}
-  AimAssistRadius: 80
-  AimAssistRange: 30
 --- !u!1 &2016039787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,7 +2367,7 @@ Transform:
   m_GameObject: {fileID: 2051843264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.40302, y: 2.68, z: -6.3738}
+  m_LocalPosition: {x: 0, y: 9.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

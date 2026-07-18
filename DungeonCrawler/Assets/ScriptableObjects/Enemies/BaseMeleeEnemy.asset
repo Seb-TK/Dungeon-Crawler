@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c95a302829184ec8938249a86898657, type: 3}
   m_Name: BaseMeleeEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  Mesh: {fileID: 1486190373629811202, guid: 4456a086d8baa4097a6aed5c434fea5a, type: 3}
+  Name: Base Melee Enemy
+  VisualMesh: {fileID: 1486190373629811202, guid: 4456a086d8baa4097a6aed5c434fea5a, type: 3}
   Health: 5
   MoveSpeed: 27
   TurnSpeed: 15

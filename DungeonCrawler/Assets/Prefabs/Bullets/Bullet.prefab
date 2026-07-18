@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b91c10b9c1244cb79efe8f73f78f684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  bulletSpeed: 10
+  bulletSpeed: 0
   isPlayerBullet: 0
   Player: {fileID: 0}
 --- !u!136 &1847418104034832605

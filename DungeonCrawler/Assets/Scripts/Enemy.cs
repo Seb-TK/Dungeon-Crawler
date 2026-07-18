@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
         seekPointObj.GetComponent<SeekPointTemp>().EnemyPos = gameObject;
         
         //instantiate and parent mesh
-        visualMesh = Instantiate(data.Mesh, transform.position, transform.rotation, transform);
+        visualMesh = Instantiate(data.VisualMesh, transform.position, transform.rotation, transform);
 
         //use scriptable object's data to set variables
         health = data.Health;
