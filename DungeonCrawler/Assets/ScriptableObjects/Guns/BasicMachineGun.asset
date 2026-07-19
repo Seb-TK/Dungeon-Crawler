@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20ae8a753e4ea455ca337ce01c340d87, type: 3}
-  m_Name: BasicGun
+  m_Name: BasicMachineGun
   m_EditorClassIdentifier: Assembly-CSharp::GunData
-  Name: Basic Gun
-  Class: Rifle
+  Name: Basic Machine Gun
+  Class: Machine Gun
   VisualMesh: {fileID: 6355475067417723421, guid: 94aa73930ca7f44998f8b562e50f2de6, type: 3}
   Bullet: {fileID: 6218370908970324485, guid: 4269c199ee9ff41e38ad971b376f5d49, type: 3}
-  FireRate: 1
-  BulletSpeed: 150
+  FireRate: 0.2
+  BulletSpeed: 120
   TurnSpeed: 5
-  Accuracy: 1
+  Accuracy: 3
   Health: 0
   Defense: 0
   SpecialAttributes: []

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NUnit.Framework.Internal.Commands;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class PlayerShooting : MonoBehaviour
     private float nextFireTime;
     public float TurnSpeed;
     public string AimType;
+    public float Accuracy;
     GameObject visualMesh;
     [SerializeField] AimAssistCrosshair aimAssistCrosshair;
     [SerializeField] GunData Gun;
@@ -21,25 +23,7 @@ public class PlayerShooting : MonoBehaviour
     {
         aimAssistCrosshair = FindAnyObjectByType<AimAssistCrosshair>().GetComponent<AimAssistCrosshair>();
     }
-    void FixedUpdate()
-    {
-        //apply scriptable object (gun) if new gun is equipped
-        
-        if (Gun != logEquippedGun)
-        {
-            Bullet = Gun.Bullet;
-            fireRate = Gun.FireRate;
-            bulletSpeed = Gun.BulletSpeed;
-            TurnSpeed = Gun.TurnSpeed;
-            if(visualMesh != null)
-            {
-                Destroy(visualMesh);
-            }
-            visualMesh = Instantiate(Gun.VisualMesh, transform.position, Quaternion.identity, transform);
-            
-        }
-        logEquippedGun = Gun;
-    }
+
     void Update()
     {
         
@@ -54,39 +38,42 @@ public class PlayerShooting : MonoBehaviour
                     nextFireTime = Time.time + fireRate;
                 }
             }
-            if (AimType == "Automatic")
-            { 
-                Collider closestEnemy = findClosestEnemy();
-                
-                if (closestEnemy != null)
-                {
 
-                    Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
-                    Quaternion targetDirection = Quaternion.LookRotation(direction);
-
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
-                }
-            } else if(AimType == "Manual"){
-                Vector3 direction;
-                Quaternion targetDirection;
-                if(aimAssistCrosshair.targetedEnemy != null){
-                    direction = (aimAssistCrosshair.targetedEnemy.transform.position - transform.position).normalized;
-                    targetDirection = Quaternion.LookRotation(direction);
-                }
-                else
-                {
-                    targetDirection = Camera.main.transform.rotation;
-                }
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
-
+            Vector3 direction;
+            Quaternion targetDirection;
+            if(aimAssistCrosshair.targetedEnemy != null){
+                direction = (aimAssistCrosshair.targetedEnemy.transform.position - transform.position).normalized;
+                targetDirection = Quaternion.LookRotation(direction);
             }
+            else
+            {
+                targetDirection = Camera.main.transform.rotation;
+            }
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetDirection, TurnSpeed * Time.deltaTime);
+            
             if (Input.GetMouseButtonDown(0))
             {
                 if (firing){firing = false;} else {firing = true;}
             }
         }
         transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z);
+    
+    //apply scriptable object (gun) if new gun is equipped
+        if (Gun != logEquippedGun)
+        {
+            Bullet = Gun.Bullet;
+            fireRate = Gun.FireRate;
+            bulletSpeed = Gun.BulletSpeed;
+            TurnSpeed = Gun.TurnSpeed;
+            if(visualMesh != null)
+            {
+                Destroy(visualMesh);
+            }
+            visualMesh = Instantiate(Gun.VisualMesh, transform.position, Quaternion.identity, transform);
+            
+        }
+        logEquippedGun = Gun;
+
     }
 
     Collider findClosestEnemy()
