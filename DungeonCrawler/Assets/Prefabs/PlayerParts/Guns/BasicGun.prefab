@@ -48,6 +48,6 @@ MonoBehaviour:
   fireRate: 0
   bulletSpeed: 0
   TurnSpeed: 0
-  AimType: Manual
+  AimType: Manuel
   aimAssistCrosshair: {fileID: 0}
   Gun: {fileID: 11400000, guid: 7699b1b87c27c4bde89baf52e126634f, type: 2}

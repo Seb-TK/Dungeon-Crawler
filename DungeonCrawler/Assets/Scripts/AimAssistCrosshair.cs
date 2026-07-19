@@ -38,15 +38,21 @@ public class AimAssistCrosshair : MonoBehaviour
             }
         } else if(targetingMethod == "Raycast")
         {
+            int layerMask = LayerMask.GetMask("Enemy", "Object");
+            Vector3 targetDirection;
+            targetDirection = Camera.main.transform.forward;
+            targetDirection = new Vector3(targetDirection.x, 0f, targetDirection.z).normalized;
+            
+            targetedEnemy = null;
             RaycastHit hit;
-            int layerMask = LayerMask.GetMask("Enemy");
-            Quaternion targetDirection;
-            targetDirection = Camera.main.transform.rotation;
-            Debug.DrawRay(Player.transform.position, targetDirection.eulerAngles, Color.red, 0f);
-            if (Physics.SphereCast(Player.transform.position, AimAssistRadius, new Vector3(0f, cameraScript.gameObject.transform.rotation.y,cameraScript.gameObject.transform.rotation.z), out hit, AimAssistRange, layerMask))
+            if (Physics.SphereCast(Player.transform.position, AimAssistRadius, targetDirection, out hit, AimAssistRange, layerMask))
             {
-                targetedEnemy = hit.collider.gameObject;
+                if(hit.collider.tag == "Enemy")
+                {
+                   targetedEnemy = hit.collider.gameObject; 
+                }
             }
+            
         }
         else
         {
