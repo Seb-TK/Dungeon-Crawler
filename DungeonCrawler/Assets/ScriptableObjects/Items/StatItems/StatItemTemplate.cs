@@ -2,8 +2,8 @@ using System.Runtime.InteropServices;
 using Unity.Properties;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StateItemTemplate", menuName = "Scriptable Objects/StateItemTemplate")]
-public class StateItemTemplate : ScriptableObject
+[CreateAssetMenu(fileName = "StatItemTemplate", menuName = "Scriptable Objects/StatItemTemplate")]
+public class StatItemTemplate : ScriptableObject
 {
     [Header("General")]
     public string Name;
@@ -15,7 +15,7 @@ public class StateItemTemplate : ScriptableObject
     //Mythical
     //Legendary
     //Unreal
-    public string Rarity;
+    public string Quality;
 
     [Header("Health")]
     public float Health;

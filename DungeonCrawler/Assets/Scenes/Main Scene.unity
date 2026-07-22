@@ -1221,7 +1221,7 @@ MonoBehaviour:
   nitroFatigueThreshold: 5
   nitroFatigueMultiplier: 0.3
   Health: 12
-  Defense: 0
+  DefenseMultiplier: 0
   playerObj: {fileID: 2895617954503619488, guid: 17bbcbf523ff24f82826577c8d297983, type: 3}
   playerMesh: {fileID: 5863533050495486670, guid: 539d9cf2764ec4bd6acf05b6daa5c1d7, type: 3}
   playerGun: {fileID: 2582670129980326617, guid: f494ac180b58d4b919a4cba25c39895d, type: 3}

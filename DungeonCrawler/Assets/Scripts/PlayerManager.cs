@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     
     [Header("Health")]
     public float Health;
-    public float Defense;
+    public float DefenseMultiplier;
 
     [Header("Objects")]
     [SerializeField] GameObject playerObj;

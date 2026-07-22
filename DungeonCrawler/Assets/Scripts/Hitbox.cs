@@ -6,16 +6,15 @@ public class Hitbox : MonoBehaviour
 {
     private GameObject playerManager;
     private PlayerManager playerManagerScript;
-    private float Defense;
-    private float DefenseMultiplier;
+    private float PartDefenseMultiplier;
+    private float OverallDefenseMultiplier;
     
     void Start()
     {
         playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
         playerManagerScript = playerManager.GetComponent<PlayerManager>();
 
-        Defense = playerManagerScript.Defense;
-
+        OverallDefenseMultiplier = playerManagerScript.DefenseMultiplier;
         
     }
 
@@ -25,9 +24,10 @@ public class Hitbox : MonoBehaviour
         {
             
             Bullet BulletScript = collider.gameObject.GetComponent<Bullet>();
-            
+            //melee script here
+            //use a break statement
 
-            if (BulletScript.isPlayerBullet) {
+            if (BulletScript.isPlayerBullet == false) {
 
                 Part Parent = transform.parent.GetComponent<Part>();
 
@@ -52,7 +52,7 @@ public class Hitbox : MonoBehaviour
                 }
                 else
                 {
-                    playerManagerScript.Health -= 1 * DefenseMultiplier;
+                    playerManagerScript.Health -= 1 * PartDefenseMultiplier * OverallDefenseMultiplier;
                     Parent.Health -= 1;
                     Debug.Log("Player Health: " + playerManagerScript.Health);
                     Debug.Log("Part health: " + Parent.Health);
@@ -65,9 +65,5 @@ public class Hitbox : MonoBehaviour
             }
         }
     }
-
-    void Update()
-    {
-        DefenseMultiplier = Defense / 100;
-    }
+    
 }

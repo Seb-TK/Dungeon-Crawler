@@ -9,7 +9,6 @@ public class Part : MonoBehaviour
     // hitbox will change health values until its broken
     // once broken it will damage main health pool and apply effect
     public float Health;
-    private float Defense;
     public float DefenseMultiplier;
     public bool isBroken;
     public string BrokenEffect;
@@ -20,8 +19,6 @@ public class Part : MonoBehaviour
     {
         playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
         playerManagerScript = playerManager.GetComponent<PlayerManager>();
-
-        Defense = playerManagerScript.Defense;
     }
     void Update()
     {
