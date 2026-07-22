@@ -9,14 +9,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public GameObject Player;
 
     // Update is called once per frame
-    void Start()
-    {
-        if (!isPlayerBullet)
-        {
-            Player = GameObject.FindGameObjectWithTag("Player");
-            transform.LookAt(Player.transform.position);
-        }
-    }
+    
     void Update()
     {
         transform.position += transform.forward * bulletSpeed * Time.deltaTime;

@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
     public EnemyData data;
     EnemyMovement movement;
     EnemyShooting shooting;
-    float health;
+    public float health;
     public GameObject SeekPointTemp;
     GameObject visualMesh;
     void Start()
@@ -34,11 +34,5 @@ public class Enemy : MonoBehaviour
         shooting.fireRate = data.FireRate;
         shooting.bulletSpeed = data.BulletSpeed;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -5,7 +5,10 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI NitroText;
+    [SerializeField] TextMeshProUGUI HealthText;
+    [SerializeField] PlayerManager playerManager;
     GameObject player;
+
 
     // Update is called once per frame
     void Update()
@@ -27,5 +30,10 @@ public class UIManager : MonoBehaviour
                 NitroText.color = Color.white;
             }
         }
+
+        HealthText.text = "Health: ";
+        HealthText.text += playerManager.Health.ToString();
+        //if (playerManager.Health)
+
     }
 }

@@ -29,8 +29,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject playerObj;
     [SerializeField] GameObject playerMesh;
     [SerializeField] GameObject playerGun;
-    [SerializeField] GameObject Part;
-
+    [SerializeField] GameObject hullObj;
+    [SerializeField] GameObject partObj;
+    
+    [Header("Scripts")]
     PlayerMovement player;
     
     void Start()
@@ -40,13 +42,28 @@ public class PlayerManager : MonoBehaviour
 
     void SpawnCharacter()
     {
+        //instantiations
+        
+        //player
         playerObj = Instantiate(playerObj, new Vector3(0,0,0), Quaternion.identity);
+        //hull ---> guns parts
+        hullObj = Instantiate(hullObj, new Vector3(0,0,0), Quaternion.identity, playerObj.transform);
+        //parts, guns loop through all children
+        foreach (Transform child in hullObj.transform)
+        {
+            if (child.CompareTag("Gun"))
+            {
+                Instantiate(playerGun, child.position, child.rotation, child);
+            }
+            else
+            {
+                GameObject partObjTemp = Instantiate(partObj, child.position, child.rotation, child);
+                partObjTemp.transform.localScale = child.localScale;
+            }
+        }
         GameObject playerMeshTemp = Instantiate(playerMesh, new Vector3(0,0,0), Quaternion.identity, playerObj.transform);
-        Instantiate(playerGun, new Vector3(0,0.55f,0), Quaternion.identity, playerObj.transform);
-        //instantiate hitboxes
-        Instantiate(Part, new Vector3(0, 0 , 0.8f), Quaternion.identity, playerObj.transform);
-
-        player = playerObj.GetComponent<PlayerMovement>();
+        
+        player = playerObj.GetComponent<PlayerMovement>(); 
 
         player.moveSpeed = moveSpeed;
         player.turnSpeed = turnSpeed;

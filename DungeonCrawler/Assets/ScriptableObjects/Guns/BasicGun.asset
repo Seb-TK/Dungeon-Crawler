@@ -17,7 +17,7 @@ MonoBehaviour:
   VisualMesh: {fileID: 6355475067417723421, guid: 94aa73930ca7f44998f8b562e50f2de6, type: 3}
   Bullet: {fileID: 6218370908970324485, guid: 4269c199ee9ff41e38ad971b376f5d49, type: 3}
   FireRate: 1
-  BulletSpeed: 150
+  BulletSpeed: 10
   TurnSpeed: 5
   Accuracy: 1
   Health: 0

@@ -12,6 +12,8 @@ TagManager:
   - Bullet
   - Melee
   - VisualMesh
+  - Part
+  - Gun
   layers:
   - Default
   - TransparentFX
