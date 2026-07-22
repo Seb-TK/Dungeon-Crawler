@@ -338,7 +338,7 @@ Transform:
   m_GameObject: {fileID: 100646767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.59971, y: -0.50001, z: -0.57364}
+  m_LocalPosition: {x: -0.6, y: -0.50001, z: -0.56}
   m_LocalScale: {x: 10.344911, y: 10.344911, z: 10.344911}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1220,9 +1220,12 @@ MonoBehaviour:
   playerMass: 1
   nitroFatigueThreshold: 5
   nitroFatigueMultiplier: 0.3
+  Health: 12
+  Defense: 0
   playerObj: {fileID: 2895617954503619488, guid: 17bbcbf523ff24f82826577c8d297983, type: 3}
   playerMesh: {fileID: 5863533050495486670, guid: 539d9cf2764ec4bd6acf05b6daa5c1d7, type: 3}
   playerGun: {fileID: 2582670129980326617, guid: f494ac180b58d4b919a4cba25c39895d, type: 3}
+  Part: {fileID: 2242494759849570429, guid: c783f6d8e31fa4516b5ac761e72e38ab, type: 3}
 --- !u!4 &1030160209
 Transform:
   m_ObjectHideFlags: 0

@@ -9,6 +9,9 @@ TagManager:
   - Ground
   - GameManager
   - PlayerManager
+  - Bullet
+  - Melee
+  - VisualMesh
   layers:
   - Default
   - TransparentFX

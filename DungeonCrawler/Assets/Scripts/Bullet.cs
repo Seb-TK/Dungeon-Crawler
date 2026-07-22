@@ -25,10 +25,6 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // //remember to change it so that you can deal damage to each part
-        if (other.CompareTag("Player") & !isPlayerBullet)
-        {
-            Destroy(gameObject);
-        }
         if (other.CompareTag("Enemy") & isPlayerBullet)
         {
             Destroy(gameObject);
