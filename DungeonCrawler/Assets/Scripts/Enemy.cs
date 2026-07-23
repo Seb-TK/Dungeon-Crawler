@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     GameObject visualMesh;
     void Start()
     {
+        Debug.Log("Hi");
+        Debug.Log("Shooting.Bullet: " + shooting.Bullet);
+        Debug.Log("data.Bullet: " + data.Bullet);
         //seek point (for visual debugging)
         GameObject seekPointObj = Instantiate(SeekPointTemp);
         seekPointObj.GetComponent<SeekPointTemp>().EnemyPos = gameObject;
@@ -29,6 +32,7 @@ public class Enemy : MonoBehaviour
         movement.turnSpeed = data.TurnSpeed;
         movement.driftMultiplier = data.DriftMultiplier;
         movement.AiType = data.AiType;
+
 
         shooting.Bullet = data.Bullet;
         shooting.fireRate = data.FireRate;
