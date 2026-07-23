@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         turn = Input.GetAxis("Horizontal");
         nitroTrail.emitting = false;
         //if youre pressing down then 
-        if (Input.GetKey(KeyCode.N))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             //always decrease nitro
             nitroFuel -= nitroUseSpeed;
